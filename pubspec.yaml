@@ -1,0 +1,67 @@
+name: paladins_world
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  crypto: ^3.0.2
+  intl: ^0.18.0
+  fast_cached_network_image: ^1.1.1
+  http: ^0.13.5
+  provider: ^6.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+      - assets/images/PaladinsBackGround.png
+      - assets/icons/Damage.png
+      - assets/icons/Flank.png
+      - assets/icons/Front_Line.png
+      - assets/icons/Support.png
+      
+  fonts:
+    - family: Rockwell
+      fonts:
+        - asset: assets/fonts/rockwell-bold.ttf
+          weight: 700
+    - family: Roboto Condensed
+      fonts:
+        - asset: assets/fonts/roboto-condensed.bold.ttf
+          weight: 700
+        - asset: assets/fonts/RobotoCondensed-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/RobotoCondensed-Light.ttf
+          weight: 300
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat-bold.ttf
+          weight: 700
+        - asset: assets/fonts/montserrat-medium.ttf
+          weight: 500
+        - asset: assets/fonts/montserrat-regular.ttf
+          weight: 400     
+    - family: Myriad Pro
+      fonts:
+        - asset: assets/fonts/MYRIADPRO-BOLD.OTF
+          weight: 700   
+        - asset: assets/fonts/MYRIADPRO-SEMIBOLD.OTF
+          weight: 500 
+        - asset: assets/fonts/MYRIADPRO-REGULAR.OTF
+          weight: 400 
+        - asset: assets/fonts/MyriadPro-Light.otf
+          weight: 300
