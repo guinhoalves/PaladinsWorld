@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/pages/home_page.dart';
+import 'utils/functions.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await UtilsFunctions.createSession();
   runApp(const PaladinsWorld());
 }
 
