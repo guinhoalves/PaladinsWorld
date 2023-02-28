@@ -16,8 +16,16 @@ class PaladinsWorld extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Paladins World',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: const Color.fromRGBO(20, 59, 79, 1),
+        brightness: Brightness.dark,
+        primaryColor: Color.fromARGB(255, 24, 110, 152),
+        primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
       ),
       home: const HomePage(),
     );

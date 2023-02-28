@@ -16,6 +16,7 @@ dependencies:
   crypto: ^3.0.2
   intl: ^0.18.0
   fast_cached_network_image: ^1.1.1
+  cached_network_image: ^3.2.3
   http: ^0.13.5
   provider: ^6.0.5
 
