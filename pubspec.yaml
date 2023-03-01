@@ -29,12 +29,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-      - assets/images/PaladinsBackGround.png
-      - assets/icons/Damage.png
-      - assets/icons/Flank.png
-      - assets/icons/Front_Line.png
-      - assets/icons/Support.png
-      
+    - assets/images/PaladinsBackGround.png
+    - assets/icons/Damage.png
+    - assets/icons/Flank.png
+    - assets/icons/Front_Line.png
+    - assets/icons/Support.png
+
   fonts:
     - family: Rockwell
       fonts:
@@ -50,19 +50,19 @@ flutter:
           weight: 300
     - family: Montserrat
       fonts:
-        - asset: assets/fonts/montserrat-bold.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
-        - asset: assets/fonts/montserrat-medium.ttf
+        - asset: assets/fonts/Montserrat-Medium.ttf
           weight: 500
-        - asset: assets/fonts/montserrat-regular.ttf
-          weight: 400     
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 400
     - family: Myriad Pro
       fonts:
         - asset: assets/fonts/MYRIADPRO-BOLD.OTF
-          weight: 700   
+          weight: 700
         - asset: assets/fonts/MYRIADPRO-SEMIBOLD.OTF
-          weight: 500 
+          weight: 500
         - asset: assets/fonts/MYRIADPRO-REGULAR.OTF
-          weight: 400 
+          weight: 400
         - asset: assets/fonts/MyriadPro-Light.otf
           weight: 300

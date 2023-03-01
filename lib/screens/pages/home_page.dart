@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../global/variables.dart';
 import '../../service/api_paladins_hirez.dart';
-import '../../utils/functions.dart';
+import '../widgets/avatarChampion.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -222,72 +221,7 @@ class _HomePageState extends State<HomePage> {
               children: List.generate(
                 champions.length,
                 (index) {
-                  return Column(
-                    children: [
-                      Container(
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.teal, width: 2.0),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 161, 229, 196),
-                              offset: Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Color.fromARGB(255, 71, 239, 239),
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            print(champions[index]);
-                          },
-                          child: CachedNetworkImage(
-                            fadeOutDuration: const Duration(milliseconds: 500),
-                            imageUrl: champions[index]["ChampionIcon_URL"],
-                            imageBuilder: (context, imageProvider) => Container(
-                              height: 110,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                  //colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
-                                ),
-                              ),
-                            ),
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.teal.shade300,
-                              ),
-                            ),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          champions[index]["Name"],
-                          style: const TextStyle(
-                            color: Colors.amber,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
+                  return AvatarChampion(champion: champions[index]);
                 },
               ),
             ),
@@ -297,9 +231,79 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Column avatarChampion(int index) {
+  //   return Column(
+  //     children: [
+  //       Container(
+  //         height: 110,
+  //         decoration: BoxDecoration(
+  //           color: Colors.transparent,
+  //           borderRadius: BorderRadius.circular(15),
+  //           border: Border.all(color: Colors.teal, width: 2.0),
+  //           boxShadow: const [
+  //             BoxShadow(
+  //               color: Color.fromARGB(255, 161, 229, 196),
+  //               offset: Offset(
+  //                 5.0,
+  //                 5.0,
+  //               ),
+  //               blurRadius: 10.0,
+  //               spreadRadius: 2.0,
+  //             ), //BoxShadow
+  //             BoxShadow(
+  //               color: Color.fromARGB(255, 71, 239, 239),
+  //               offset: Offset(0.0, 0.0),
+  //               blurRadius: 0.0,
+  //               spreadRadius: 0.0,
+  //             ), //BoxShadow
+  //           ],
+  //         ),
+  //         child: InkWell(
+  //           onTap: () {
+  //             print(champions[index]);
+  //           },
+  //           child: CachedNetworkImage(
+  //             fadeOutDuration: const Duration(milliseconds: 500),
+  //             imageUrl: champions[index]["ChampionIcon_URL"],
+  //             imageBuilder: (context, imageProvider) => Container(
+  //               height: 110,
+  //               decoration: BoxDecoration(
+  //                 borderRadius: BorderRadius.circular(15),
+  //                 image: DecorationImage(
+  //                   image: imageProvider,
+  //                   fit: BoxFit.cover,
+  //                   //colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
+  //                 ),
+  //               ),
+  //             ),
+  //             placeholder: (context, url) => Center(
+  //               child: CircularProgressIndicator(
+  //                 color: Colors.teal.shade300,
+  //               ),
+  //             ),
+  //             errorWidget: (context, url, error) => const Icon(Icons.error),
+  //           ),
+  //         ),
+  //       ),
+  //       Expanded(
+  //         child: Text(
+  //           champions[index]["Name"],
+  //           style: const TextStyle(
+  //             color: Colors.amber,
+  //             fontFamily: 'Montserrat',
+  //             fontWeight: FontWeight.bold,
+  //             fontSize: 20,
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
   _getChampions() async {
     isLoading = true;
-    var responseChampions = await ApiPaladinsHirez.getChampions(sessionId: GlobalsVariables.sessionId);
+    var responseChampions = await ApiPaladinsHirez.getChampions(
+        sessionId: GlobalsVariables.sessionId);
 
     for (var item in responseChampions!) {
       champions.add(item);
