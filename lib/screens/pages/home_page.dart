@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../global/variables.dart';
 import '../../service/api_paladins_hirez.dart';
 import '../widgets/avatarChampion.dart';
+import '../widgets/btnCategoryChampion_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,8 +12,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isLoading = false;
   List champions = [];
+  List displayChampions = [];
+
+  bool btnSupSelected = false;
+  bool btnTankSelected = false;
+  bool btnFlankSelected = false;
+  bool btnDmgSelected = false;
+  bool btnAll = true;
+
   @override
   void initState() {
     _getChampions();
@@ -49,168 +57,90 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          // Container(
-          //   color: Colors.transparent,
-          //   padding: EdgeInsets.only(top: 10, bottom: 10),
-          //   child: Center(
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: [
-          //         Row(
-          //           children: [
-          //             Container(
-          //               height: 40,
-          //               width: 80,
-          //               child: TextButton(
-          //                 style: ButtonStyle(
-          //                   elevation: MaterialStateProperty.all(10.0),
-          //                   backgroundColor: controller.btnAll.value
-          //                       ? MaterialStateProperty.all<Color>(Colors.teal.shade500)
-          //                       : MaterialStateProperty.all<Color>(Colors.teal.shade300),
-          //                   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-          //                   alignment: Alignment.center,
-          //                 ),
-          //                 onPressed: () => controller.selecionafiltroClass(0),
-          //                 child: Text(
-          //                   'Todos',
-          //                   style: TextStyle(
-          //                     fontFamily: 'Montserrat',
-          //                     fontWeight: FontWeight.bold,
-          //                   ),
-          //                 ),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //         Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Container(
-          //               height: 40,
-          //               width: 120,
-          //               child: TextButton.icon(
-          //                 style: ButtonStyle(
-          //                   elevation: MaterialStateProperty.all(10.0),
-          //                   backgroundColor: controller.btnSupSelecionado.value
-          //                       ? MaterialStateProperty.all<Color>(Colors.teal.shade500)
-          //                       : MaterialStateProperty.all<Color>(Colors.teal.shade300),
-          //                   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-          //                   alignment: Alignment.topLeft,
-          //                 ),
-          //                 onPressed: () => controller.selecionafiltroClass(1),
-          //                 icon: Image.asset(
-          //                   "assets/icons/Support.png",
-          //                   color: Colors.black,
-          //                 ),
-          //                 label: const Text(
-          //                   'Supporte',
-          //                   style: TextStyle(
-          //                     fontFamily: 'Montserrat',
-          //                     fontWeight: FontWeight.bold,
-          //                   ),
-          //                 ),
-          //               ),
-          //             ),
-          //             SizedBox(
-          //               height: 10,
-          //             ),
-          //             Container(
-          //               height: 40,
-          //               width: 120,
-          //               child: TextButton.icon(
-          //                 style: ButtonStyle(
-          //                   elevation: MaterialStateProperty.all(10.0),
-          //                   backgroundColor: controller.btntankSelecionado.value
-          //                       ? MaterialStateProperty.all<Color>(Colors.teal.shade500)
-          //                       : MaterialStateProperty.all<Color>(Colors.teal.shade300),
-          //                   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-          //                   alignment: Alignment.topLeft,
-          //                 ),
-          //                 onPressed: () => controller.selecionafiltroClass(2),
-          //                 icon: Image.asset(
-          //                   "assets/icons/Front_Line.png",
-          //                   color: Colors.black,
-          //                 ),
-          //                 label: const Text(
-          //                   'Tanker',
-          //                   style: TextStyle(
-          //                     fontFamily: 'Montserrat',
-          //                     fontWeight: FontWeight.bold,
-          //                   ),
-          //                 ),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //         Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Container(
-          //               height: 40,
-          //               width: 120,
-          //               child: TextButton.icon(
-          //                 style: ButtonStyle(
-          //                   elevation: MaterialStateProperty.all(10.0),
-          //                   backgroundColor: controller.btnFlankSelecionado.value
-          //                       ? MaterialStateProperty.all<Color>(Colors.teal.shade500)
-          //                       : MaterialStateProperty.all<Color>(Colors.teal.shade300),
-          //                   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-          //                   alignment: Alignment.topLeft,
-          //                 ),
-          //                 onPressed: () => controller.selecionafiltroClass(3),
-          //                 icon: Image.asset(
-          //                   "assets/icons/Flank.png",
-          //                   color: Colors.black,
-          //                 ),
-          //                 label: const Text(
-          //                   'Flanco',
-          //                   style: TextStyle(
-          //                     fontFamily: 'Montserrat',
-          //                     fontWeight: FontWeight.bold,
-          //                   ),
-          //                 ),
-          //               ),
-          //             ),
-          //             const SizedBox(
-          //               height: 10,
-          //             ),
-          //             Container(
-          //               height: 40,
-          //               width: 120,
-          //               child: TextButton.icon(
-          //                 style: ButtonStyle(
-          //                   elevation: MaterialStateProperty.all(10.0),
-          //                   backgroundColor: controller.btnDmgSelecionado.value
-          //                       ? MaterialStateProperty.all<Color>(Colors.teal.shade500)
-          //                       : MaterialStateProperty.all<Color>(Colors.teal.shade300),
-          //                   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-          //                   alignment: Alignment.topLeft,
-          //                 ),
-          //                 onPressed: () => controller.selecionafiltroClass(4),
-          //                 icon: Image.asset(
-          //                   "assets/icons/Damage.png",
-          //                   color: Colors.black,
-          //                 ),
-          //                 label: const Text(
-          //                   'Damage',
-          //                   style: TextStyle(
-          //                     fontFamily: 'Montserrat',
-          //                     fontWeight: FontWeight.bold,
-          //                   ),
-          //                 ),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
-          // const SizedBox(
-          //   height: 5,
-          // ),
+          Container(
+            color: Colors.transparent,
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 40,
+                        width: 80,
+                        child: TextButton(
+                          style: ButtonStyle(
+                            elevation: MaterialStateProperty.all(10.0),
+                            backgroundColor: btnAll
+                                ? MaterialStateProperty.all<Color>(
+                                    Colors.teal.shade500)
+                                : MaterialStateProperty.all<Color>(
+                                    Colors.teal.shade300),
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.black),
+                            alignment: Alignment.center,
+                          ),
+                          onPressed: () => _getChampionsByFilterClass(0),
+                          child: const Text(
+                            'Todos',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BtnCategoryChampion(
+                        selected: btnSupSelected,
+                        onPressed: () => _getChampionsByFilterClass(1),
+                        pathIcon: 'assets/icons/Support.png',
+                        label: 'Support',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      BtnCategoryChampion(
+                        selected: btnTankSelected,
+                        onPressed: () => _getChampionsByFilterClass(2),
+                        pathIcon: 'assets/icons/Front_Line.png',
+                        label: 'Tanker',
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BtnCategoryChampion(
+                        selected: btnFlankSelected,
+                        onPressed: () => _getChampionsByFilterClass(3),
+                        pathIcon: 'assets/icons/Flank.png',
+                        label: 'Flank',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      BtnCategoryChampion(
+                        selected: btnDmgSelected,
+                        onPressed: () => _getChampionsByFilterClass(4),
+                        pathIcon: 'assets/icons/Flank.png',
+                        label: 'Damage',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
           Expanded(
             child: GridView.count(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -219,9 +149,9 @@ class _HomePageState extends State<HomePage> {
               childAspectRatio: 3 / 2.5,
               crossAxisCount: 2,
               children: List.generate(
-                champions.length,
+                displayChampions.length,
                 (index) {
-                  return AvatarChampion(champion: champions[index]);
+                  return AvatarChampion(champion: displayChampions[index]);
                 },
               ),
             ),
@@ -231,87 +161,101 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Column avatarChampion(int index) {
-  //   return Column(
-  //     children: [
-  //       Container(
-  //         height: 110,
-  //         decoration: BoxDecoration(
-  //           color: Colors.transparent,
-  //           borderRadius: BorderRadius.circular(15),
-  //           border: Border.all(color: Colors.teal, width: 2.0),
-  //           boxShadow: const [
-  //             BoxShadow(
-  //               color: Color.fromARGB(255, 161, 229, 196),
-  //               offset: Offset(
-  //                 5.0,
-  //                 5.0,
-  //               ),
-  //               blurRadius: 10.0,
-  //               spreadRadius: 2.0,
-  //             ), //BoxShadow
-  //             BoxShadow(
-  //               color: Color.fromARGB(255, 71, 239, 239),
-  //               offset: Offset(0.0, 0.0),
-  //               blurRadius: 0.0,
-  //               spreadRadius: 0.0,
-  //             ), //BoxShadow
-  //           ],
-  //         ),
-  //         child: InkWell(
-  //           onTap: () {
-  //             print(champions[index]);
-  //           },
-  //           child: CachedNetworkImage(
-  //             fadeOutDuration: const Duration(milliseconds: 500),
-  //             imageUrl: champions[index]["ChampionIcon_URL"],
-  //             imageBuilder: (context, imageProvider) => Container(
-  //               height: 110,
-  //               decoration: BoxDecoration(
-  //                 borderRadius: BorderRadius.circular(15),
-  //                 image: DecorationImage(
-  //                   image: imageProvider,
-  //                   fit: BoxFit.cover,
-  //                   //colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
-  //                 ),
-  //               ),
-  //             ),
-  //             placeholder: (context, url) => Center(
-  //               child: CircularProgressIndicator(
-  //                 color: Colors.teal.shade300,
-  //               ),
-  //             ),
-  //             errorWidget: (context, url, error) => const Icon(Icons.error),
-  //           ),
-  //         ),
-  //       ),
-  //       Expanded(
-  //         child: Text(
-  //           champions[index]["Name"],
-  //           style: const TextStyle(
-  //             color: Colors.amber,
-  //             fontFamily: 'Montserrat',
-  //             fontWeight: FontWeight.bold,
-  //             fontSize: 20,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
+  void _getChampionsByFilterClass(int championCategory) {
+    //0 all
+    //1 sup
+    //2 tank
+    //3 flank
+    //4 damage
+
+    setState(() {
+      switch (championCategory) {
+        case 0:
+          displayChampions.clear();
+          for (var item in champions) {
+            displayChampions.add(item);
+          }
+          btnSupSelected = false;
+          btnTankSelected = false;
+          btnFlankSelected = false;
+          btnDmgSelected = false;
+          btnAll = true;
+          break;
+        case 1:
+          displayChampions.clear();
+          for (var item in champions) {
+            if (item["Roles"].contains("Suporte")) {
+              displayChampions.add(item);
+            }
+          }
+
+          btnSupSelected = true;
+          btnTankSelected = false;
+          btnFlankSelected = false;
+          btnDmgSelected = false;
+          btnAll = false;
+          break;
+        case 2:
+          displayChampions.clear();
+          for (var item in champions) {
+            if (item["Roles"].contains("Tanque")) {
+              displayChampions.add(item);
+            }
+          }
+          btnTankSelected = true;
+          btnSupSelected = false;
+          btnFlankSelected = false;
+          btnDmgSelected = false;
+          btnAll = false;
+          break;
+        case 3:
+          displayChampions.clear();
+          for (var item in champions) {
+            if (item["Roles"].contains("Flanco")) {
+              displayChampions.add(item);
+            }
+          }
+          btnFlankSelected = true;
+          btnSupSelected = false;
+          btnTankSelected = false;
+          btnDmgSelected = false;
+          btnAll = false;
+          break;
+        case 4:
+          displayChampions.clear();
+          for (var item in champions) {
+            if (item["Roles"].contains("Dano")) {
+              displayChampions.add(item);
+            }
+          }
+          btnDmgSelected = true;
+          btnSupSelected = false;
+          btnTankSelected = false;
+          btnFlankSelected = false;
+          btnAll = false;
+          break;
+        default:
+          displayChampions.clear();
+          for (var item in champions) {
+            displayChampions.add(item);
+          }
+          btnSupSelected = false;
+          btnTankSelected = false;
+          btnFlankSelected = false;
+          btnDmgSelected = false;
+          btnAll = true;
+      }
+    });
+  }
 
   _getChampions() async {
-    isLoading = true;
     var responseChampions = await ApiPaladinsHirez.getChampions(
         sessionId: GlobalsVariables.sessionId);
 
     for (var item in responseChampions!) {
       champions.add(item);
-      // campeoesExibicao.add(item);
+      displayChampions.add(item);
     }
-    setState(() {
-      isLoading = false;
-    });
-    print(champions);
+    setState(() {});
   }
 }
