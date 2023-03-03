@@ -18,7 +18,7 @@ class PaladinsWorld extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromRGBO(20, 59, 79, 1),
         brightness: Brightness.dark,
-        primaryColor: Color.fromARGB(255, 24, 110, 152),
+        primaryColor: const Color.fromARGB(255, 24, 110, 152),
         primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(
@@ -27,7 +27,10 @@ class PaladinsWorld extends StatelessWidget {
           bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paladins_world/models/champion.dart';
 import '../../global/variables.dart';
 import '../../service/api_paladins_hirez.dart';
 import '../widgets/avatarChampion.dart';
@@ -20,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   bool btnFlankSelected = false;
   bool btnDmgSelected = false;
   bool btnAll = true;
-
   @override
   void initState() {
     _getChampions();
@@ -30,6 +30,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: const Text(
           'World Of Paladins',
@@ -74,12 +102,9 @@ class _HomePageState extends State<HomePage> {
                           style: ButtonStyle(
                             elevation: MaterialStateProperty.all(10.0),
                             backgroundColor: btnAll
-                                ? MaterialStateProperty.all<Color>(
-                                    Colors.teal.shade500)
-                                : MaterialStateProperty.all<Color>(
-                                    Colors.teal.shade300),
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.black),
+                                ? MaterialStateProperty.all<Color>(Colors.teal.shade500)
+                                : MaterialStateProperty.all<Color>(Colors.teal.shade300),
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                             alignment: Alignment.center,
                           ),
                           onPressed: () => _getChampionsByFilterClass(0),
@@ -151,7 +176,11 @@ class _HomePageState extends State<HomePage> {
               children: List.generate(
                 displayChampions.length,
                 (index) {
-                  return AvatarChampion(champion: displayChampions[index]);
+                  return AvatarChampion(
+                    champion: Champion.fromJson(
+                      displayChampions[index],
+                    ),
+                  );
                 },
               ),
             ),
@@ -249,8 +278,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _getChampions() async {
-    var responseChampions = await ApiPaladinsHirez.getChampions(
-        sessionId: GlobalsVariables.sessionId);
+    var responseChampions = await ApiPaladinsHirez.getChampions(sessionId: GlobalsVariables.sessionId);
 
     for (var item in responseChampions!) {
       champions.add(item);

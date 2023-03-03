@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../../models/champion.dart';
+import '../pages/champion_details_page.dart';
 
 class AvatarChampion extends StatelessWidget {
-  final dynamic champion;
+  final Champion champion;
 
   const AvatarChampion({
     super.key,
@@ -20,29 +22,25 @@ class AvatarChampion extends StatelessWidget {
             border: Border.all(color: Colors.teal, width: 2.0),
             boxShadow: const [
               BoxShadow(
-                color: Color.fromARGB(255, 161, 229, 196),
-                offset: Offset(
-                  5.0,
-                  5.0,
-                ),
+                color: Color.fromARGB(255, 242, 247, 244),
                 blurRadius: 10.0,
-                spreadRadius: 2.0,
+                spreadRadius: 1.0,
               ), //BoxShadow
-              BoxShadow(
-                color: Color.fromARGB(255, 71, 239, 239),
-                offset: Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
+              //BoxShadow
             ],
           ),
           child: InkWell(
             onTap: () {
-              print(champion);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ChampionDetailsPage(champion: champion),
+                ),
+              );
+              // Navigator.pushNamed(context, '/championDetails', arguments: champion);
             },
             child: CachedNetworkImage(
               fadeOutDuration: const Duration(milliseconds: 500),
-              imageUrl: champion["ChampionIcon_URL"],
+              imageUrl: champion.championIconURL,
               imageBuilder: (context, imageProvider) => Container(
                 height: 110,
                 decoration: BoxDecoration(
@@ -65,7 +63,7 @@ class AvatarChampion extends StatelessWidget {
         ),
         Expanded(
           child: Text(
-            champion["Name"],
+            champion.name,
             style: const TextStyle(
               color: Colors.amber,
               fontFamily: 'Montserrat',
