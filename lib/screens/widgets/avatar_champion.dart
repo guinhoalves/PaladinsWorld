@@ -17,7 +17,7 @@ class AvatarChampion extends StatelessWidget {
         Container(
           height: 110,
           decoration: BoxDecoration(
-            color: Colors.transparent,
+            color: const Color.fromRGBO(20, 59, 79, 1),
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: Colors.teal, width: 2.0),
             boxShadow: const [
