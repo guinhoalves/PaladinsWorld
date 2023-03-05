@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:paladins_world/models/champion.dart';
 import '../../global/variables.dart';
 import '../../service/api_paladins_hirez.dart';
-import '../widgets/avatarChampion.dart';
-import '../widgets/btnCategoryChampion_widget.dart';
+import '../widgets/avatar_champion.dart';
+import '../widgets/btn_category_champion_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.teal,
               ),
               child: Text('Drawer Header'),
             ),
@@ -102,9 +102,12 @@ class _HomePageState extends State<HomePage> {
                           style: ButtonStyle(
                             elevation: MaterialStateProperty.all(10.0),
                             backgroundColor: btnAll
-                                ? MaterialStateProperty.all<Color>(Colors.teal.shade500)
-                                : MaterialStateProperty.all<Color>(Colors.teal.shade300),
-                            foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                ? MaterialStateProperty.all<Color>(
+                                    Colors.teal.shade500)
+                                : MaterialStateProperty.all<Color>(
+                                    Colors.teal.shade300),
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.black),
                             alignment: Alignment.center,
                           ),
                           onPressed: () => _getChampionsByFilterClass(0),
@@ -278,7 +281,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _getChampions() async {
-    var responseChampions = await ApiPaladinsHirez.getChampions(sessionId: GlobalsVariables.sessionId);
+    var responseChampions = await ApiPaladinsHirez.getChampions(
+        sessionId: GlobalsVariables.sessionId);
 
     for (var item in responseChampions!) {
       champions.add(item);
