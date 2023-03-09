@@ -14,10 +14,10 @@ class CustomTitle extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
-          color: Colors.amber,
+          color: Colors.white,
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.bold,
-          fontSize: 22,
+          fontSize: 24,
         ),
       ),
     );

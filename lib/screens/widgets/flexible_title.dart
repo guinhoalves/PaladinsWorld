@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paladins_world/global/variables.dart';
 import 'package:paladins_world/models/champion.dart';
 
 class FlexibleTitle extends StatelessWidget {
@@ -22,8 +23,8 @@ class FlexibleTitle extends StatelessWidget {
           Flexible(
             child: Text(
               champion.name,
-              style: const TextStyle(
-                color: Colors.amber,
+              style: TextStyle(
+                color: GlobalsVariables.purpleTitles,
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
@@ -33,9 +34,9 @@ class FlexibleTitle extends StatelessWidget {
           Flexible(
             child: Text(
               champion.title,
-              style: const TextStyle(
-                color: Colors.amber,
-                fontFamily: 'Rockwell',
+              style: TextStyle(
+                color: GlobalsVariables.purpleTitles,
+                fontFamily: 'Montserrat',
                 fontSize: 22,
               ),
             ),

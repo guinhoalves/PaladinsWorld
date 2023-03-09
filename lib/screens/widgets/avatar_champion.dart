@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:paladins_world/global/variables.dart';
 import '../../models/champion.dart';
 import '../pages/champion_details_page.dart';
 
@@ -61,17 +62,28 @@ class AvatarChampion extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: Text(
-            champion.name,
-            style: const TextStyle(
-              color: Colors.amber,
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
+        const SizedBox(
+          height: 5,
         ),
+        Expanded(
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: [
+              FittedBox(
+                child: Text(
+                  textAlign: TextAlign.center,
+                  champion.name,
+                  style: TextStyle(
+                    color: GlobalsVariables.textButtonGrey,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
