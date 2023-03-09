@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../global/variables.dart';
+
 class BtnCategoryChampion extends StatefulWidget {
   final bool selected;
   final void Function()? onPressed;
@@ -27,20 +29,25 @@ class _BtnCategoryChampionState extends State<BtnCategoryChampion> {
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(10.0),
           backgroundColor: widget.selected
-              ? MaterialStateProperty.all<Color>(Colors.teal.shade500)
-              : MaterialStateProperty.all<Color>(Colors.teal.shade300),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              ? MaterialStateProperty.all<Color>(
+                  GlobalsVariables.buttonBlueDark.withOpacity(0.6))
+              : MaterialStateProperty.all<Color>(
+                  GlobalsVariables.buttonBlueDark),
+          foregroundColor: MaterialStateProperty.all<Color>(
+            GlobalsVariables.textButtonGrey,
+          ),
           alignment: Alignment.topLeft,
         ),
         onPressed: widget.onPressed,
         icon: Image.asset(
           widget.pathIcon,
-          color: Colors.black,
+          color: GlobalsVariables.textButtonGrey,
         ),
         label: Text(
           widget.label,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'Montserrat',
+            color: GlobalsVariables.textButtonGrey,
             fontWeight: FontWeight.bold,
           ),
         ),

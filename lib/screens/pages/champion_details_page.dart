@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paladins_world/global/variables.dart';
 import '../../models/champion.dart';
 import '../../models/champion_abilities.dart';
 import '../widgets/container_ability.dart';
@@ -33,18 +34,7 @@ class _ChampionDetailsPageState extends State<ChampionDetailsPage> {
           ),
         ),
         centerTitle: true,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: <Color>[
-                Colors.teal,
-                Colors.blue.shade400,
-              ],
-            ),
-          ),
-        ),
+        backgroundColor: GlobalsVariables.backgroundColorLight,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -71,15 +61,7 @@ class _ChampionDetailsPageState extends State<ChampionDetailsPage> {
                 vertical: 15,
                 horizontal: 10,
               ),
-              child: const Text(
-                'Habilidades',
-                style: TextStyle(
-                  color: Colors.amber,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                ),
-              ),
+              child: const CustomTitle(title: 'Habilidades'),
             ),
             Padding(
               padding: const EdgeInsets.all(20),
